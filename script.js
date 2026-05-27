@@ -1,86 +1,64 @@
-const presenceGrid = document.getElementById("presenceGrid");
-const activityLog = document.getElementById("activityLog");
+const peopleCount =
+document.getElementById("peopleCount");
 
-const peopleCount = document.getElementById("peopleCount");
-const roomCount = document.getElementById("roomCount");
+const roomCount =
+document.getElementById("roomCount");
 
-let presences = [];
+const activityLog =
+document.getElementById("activityLog");
 
-function simulateDetection(person, room){
+let activeRooms = [];
 
-  const confidence = Math.floor(
+function detectPerson(person, room){
+
+  document
+  .querySelectorAll(".room")
+  .forEach(r => {
+
+    r.classList.remove("active");
+
+  });
+
+  const roomElement =
+  document.getElementById(room);
+
+  roomElement.classList.add("active");
+
+  const status =
+  document.getElementById(
+    `status-${room}`
+  );
+
+  const confidence =
+  Math.floor(
     Math.random() * 20
   ) + 80;
 
-  const time = new Date().toLocaleTimeString();
+  status.innerHTML = `
+    ${person}<br>
+    Affidabilità ${confidence}%
+  `;
 
-  const existing = presences.find(
-    p => p.person === person
-  );
+  if(!activeRooms.includes(room)){
 
-  if(existing){
-
-    existing.room = room;
-    existing.confidence = confidence;
-    existing.time = time;
-
-  }else{
-
-    presences.push({
-      person,
-      room,
-      confidence,
-      time
-    });
+    activeRooms.push(room);
 
   }
 
-  updateUI();
+  peopleCount.innerText = "1";
+
+  roomCount.innerText =
+  activeRooms.length;
 
   addLog(
-    `${person} rilevato in ${room} (${confidence}%)`
+    `${person} rilevato in ${room}`
   );
-}
-
-function updateUI(){
-
-  presenceGrid.innerHTML = "";
-
-  presences.forEach(p => {
-
-    presenceGrid.innerHTML += `
-      <div class="presenceCard">
-        <h3>${p.person}</h3>
-
-        <div class="roomName">
-          ${p.room}
-        </div>
-
-        <div class="confidence">
-          Affidabilità: ${p.confidence}%
-        </div>
-
-        <div class="timeText">
-          Ultimo rilevamento: ${p.time}
-        </div>
-      </div>
-    `;
-  });
-
-  peopleCount.innerText = presences.length;
-
-  const uniqueRooms = [
-    ...new Set(
-      presences.map(p => p.room)
-    )
-  ];
-
-  roomCount.innerText = uniqueRooms.length;
 }
 
 function addLog(text){
 
-  const div = document.createElement("div");
+  const div =
+  document.createElement("div");
 
   div.className = "logItem";
 
@@ -92,41 +70,71 @@ function addLog(text){
   activityLog.prepend(div);
 }
 
-function clearPresence(){
+function resetRooms(){
 
-  presences = [];
+  document
+  .querySelectorAll(".room")
+  .forEach(room => {
 
-  updateUI();
+    room.classList.remove("active");
 
-  addLog("Presenze azzerate");
+  });
+
+  document
+  .querySelectorAll(".roomStatus")
+  .forEach(status => {
+
+    status.innerHTML =
+    "Nessuno rilevato";
+
+  });
+
+  activeRooms = [];
+
+  peopleCount.innerText = "0";
+
+  roomCount.innerText = "0";
+
+  addLog(
+    "Sistema resettato"
+  );
 }
 
 let deferredPrompt;
 
-window.addEventListener("beforeinstallprompt", (e) => {
+window.addEventListener(
+  "beforeinstallprompt",
+  (e) => {
 
-  e.preventDefault();
+    e.preventDefault();
 
-  deferredPrompt = e;
-});
+    deferredPrompt = e;
+
+  }
+);
 
 document
 .getElementById("installBtn")
-.addEventListener("click", async () => {
+.addEventListener(
+  "click",
+  async () => {
 
-  if(deferredPrompt){
+    if(deferredPrompt){
 
-    deferredPrompt.prompt();
+      deferredPrompt.prompt();
 
-    await deferredPrompt.userChoice;
+      await deferredPrompt.userChoice;
 
-    deferredPrompt = null;
+      deferredPrompt = null;
+    }
+
   }
-});
+);
 
 if("serviceWorker" in navigator){
 
-  navigator.serviceWorker.register(
-    "service-worker.js"
-  );
+  navigator
+  .serviceWorker
+  .register("service-worker.js");
+
 }
