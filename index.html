@@ -1,109 +1,193 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
   <title>RoomSense AI</title>
 
-  <link rel="stylesheet" href="style.css" />
-  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet"
+        href="style.css">
 
-  <meta name="theme-color" content="#0f172a" />
+  <link rel="manifest"
+        href="manifest.webmanifest">
+
+  <meta name="theme-color"
+        content="#020617">
 </head>
 
 <body>
 
   <header class="topbar">
+
     <div class="logoBox">
-      <div class="logoCircle">📡</div>
+
+      <div class="logoIcon">
+        📡
+      </div>
 
       <div>
         <h1>RoomSense AI</h1>
-        <p>Monitoraggio intelligente presenza</p>
-      </div>
-    </div>
-
-    <button id="installBtn" class="installBtn">
-      Installa App
-    </button>
-  </header>
-
-  <main class="container">
-
-    <section class="heroCard">
-      <div class="heroLeft">
-        <h2>Presenza intelligente in tempo reale</h2>
-
         <p>
-          Sistema AI basato su segnali wireless e sensori smart.
+          Mappa casa intelligente
         </p>
       </div>
 
-      <div class="heroRight">
-        <div class="pulse"></div>
-      </div>
-    </section>
+    </div>
 
-    <section class="statsGrid">
+    <button class="installBtn"
+            id="installBtn">
+      Installa
+    </button>
 
-      <div class="statCard">
+  </header>
+
+  <main class="mainContainer">
+
+    <section class="dashboardGrid">
+
+      <div class="infoCard">
         <h3>Persone rilevate</h3>
-        <span id="peopleCount">0</span>
+
+        <span id="peopleCount">
+          0
+        </span>
       </div>
 
-      <div class="statCard">
+      <div class="infoCard">
         <h3>Stanze attive</h3>
-        <span id="roomCount">0</span>
+
+        <span id="roomCount">
+          0
+        </span>
       </div>
 
-      <div class="statCard">
-        <h3>Sensori online</h3>
-        <span>5</span>
+      <div class="infoCard">
+        <h3>AI Status</h3>
+
+        <span class="onlineText">
+          ONLINE
+        </span>
       </div>
 
     </section>
 
-    <section class="sectionTitle">
-      <h2>Presenze attuali</h2>
+    <section class="houseWrapper">
+
+      <div class="houseMap">
+
+        <div class="room"
+             id="cucina">
+
+          <div class="roomTitle">
+            🍳 Cucina
+          </div>
+
+          <div class="roomStatus"
+               id="status-cucina">
+
+            Nessuno rilevato
+
+          </div>
+
+          <div class="radar"></div>
+
+        </div>
+
+        <div class="room"
+             id="salone">
+
+          <div class="roomTitle">
+            🛋️ Salone
+          </div>
+
+          <div class="roomStatus"
+               id="status-salone">
+
+            Nessuno rilevato
+
+          </div>
+
+          <div class="radar"></div>
+
+        </div>
+
+        <div class="room"
+             id="camera">
+
+          <div class="roomTitle">
+            🛏️ Camera
+          </div>
+
+          <div class="roomStatus"
+               id="status-camera">
+
+            Nessuno rilevato
+
+          </div>
+
+          <div class="radar"></div>
+
+        </div>
+
+        <div class="room"
+             id="garage">
+
+          <div class="roomTitle">
+            🚗 Garage
+          </div>
+
+          <div class="roomStatus"
+               id="status-garage">
+
+            Nessuno rilevato
+
+          </div>
+
+          <div class="radar"></div>
+
+        </div>
+
+      </div>
+
     </section>
 
-    <section id="presenceGrid" class="presenceGrid">
-    </section>
+    <section class="controls">
 
-    <section class="sectionTitle">
-      <h2>Simulazione rilevamenti</h2>
-    </section>
-
-    <section class="controlsGrid">
-
-      <button onclick="simulateDetection('Marco','Cucina')">
+      <button onclick="detectPerson('Marco','cucina')">
         Marco → Cucina
       </button>
 
-      <button onclick="simulateDetection('Serena','Camera')">
+      <button onclick="detectPerson('Serena','camera')">
         Serena → Camera
       </button>
 
-      <button onclick="simulateDetection('Damiano','Salone')">
+      <button onclick="detectPerson('Damiano','salone')">
         Damiano → Salone
       </button>
 
-      <button onclick="simulateDetection('Marco','Garage')">
+      <button onclick="detectPerson('Marco','garage')">
         Marco → Garage
       </button>
 
-      <button onclick="clearPresence()">
-        Reset Presenze
+      <button onclick="resetRooms()">
+        Reset
       </button>
 
     </section>
 
-    <section class="sectionTitle">
-      <h2>Log attività</h2>
-    </section>
+    <section class="activityBox">
 
-    <section id="activityLog" class="activityLog">
+      <h2>
+        Log AI
+      </h2>
+
+      <div id="activityLog">
+
+      </div>
+
     </section>
 
   </main>
@@ -111,4 +195,5 @@
   <script src="script.js"></script>
 
 </body>
+
 </html>
