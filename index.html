@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>RoomSense AI</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+
+  <meta name="theme-color" content="#0f172a" />
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="logoBox">
+      <div class="logoCircle">📡</div>
+
+      <div>
+        <h1>RoomSense AI</h1>
+        <p>Monitoraggio intelligente presenza</p>
+      </div>
+    </div>
+
+    <button id="installBtn" class="installBtn">
+      Installa App
+    </button>
+  </header>
+
+  <main class="container">
+
+    <section class="heroCard">
+      <div class="heroLeft">
+        <h2>Presenza intelligente in tempo reale</h2>
+
+        <p>
+          Sistema AI basato su segnali wireless e sensori smart.
+        </p>
+      </div>
+
+      <div class="heroRight">
+        <div class="pulse"></div>
+      </div>
+    </section>
+
+    <section class="statsGrid">
+
+      <div class="statCard">
+        <h3>Persone rilevate</h3>
+        <span id="peopleCount">0</span>
+      </div>
+
+      <div class="statCard">
+        <h3>Stanze attive</h3>
+        <span id="roomCount">0</span>
+      </div>
+
+      <div class="statCard">
+        <h3>Sensori online</h3>
+        <span>5</span>
+      </div>
+
+    </section>
+
+    <section class="sectionTitle">
+      <h2>Presenze attuali</h2>
+    </section>
+
+    <section id="presenceGrid" class="presenceGrid">
+    </section>
+
+    <section class="sectionTitle">
+      <h2>Simulazione rilevamenti</h2>
+    </section>
+
+    <section class="controlsGrid">
+
+      <button onclick="simulateDetection('Marco','Cucina')">
+        Marco → Cucina
+      </button>
+
+      <button onclick="simulateDetection('Serena','Camera')">
+        Serena → Camera
+      </button>
+
+      <button onclick="simulateDetection('Damiano','Salone')">
+        Damiano → Salone
+      </button>
+
+      <button onclick="simulateDetection('Marco','Garage')">
+        Marco → Garage
+      </button>
+
+      <button onclick="clearPresence()">
+        Reset Presenze
+      </button>
+
+    </section>
+
+    <section class="sectionTitle">
+      <h2>Log attività</h2>
+    </section>
+
+    <section id="activityLog" class="activityLog">
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
