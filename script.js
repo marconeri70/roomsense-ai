@@ -58,6 +58,55 @@ const positions = {
 
 };
 
+const paths = {
+
+  cucina:[
+    "ingresso",
+    "corridoio",
+    "cucina"
+  ],
+
+  soggiorno:[
+    "ingresso",
+    "corridoio",
+    "soggiorno"
+  ],
+
+  studio:[
+    "ingresso",
+    "studio"
+  ],
+
+  camera1:[
+    "ingresso",
+    "corridoio",
+    "camera1"
+  ],
+
+  camera2:[
+    "ingresso",
+    "corridoio",
+    "camera2"
+  ],
+
+  camera3:[
+    "ingresso",
+    "studio",
+    "camera3"
+  ],
+
+  bagno1:[
+    "corridoio",
+    "bagno1"
+  ],
+
+  bagno2:[
+    "corridoio",
+    "bagno2"
+  ]
+
+};
+
 const people = {
 
   marco:{
@@ -73,60 +122,87 @@ const people = {
   damiano:{
     element:
     document.getElementById("avatar-damiano")
+  },
+
+  cinzia:{
+    element:
+    document.getElementById("avatar-cinzia")
   }
 
 };
 
-function movePerson(name, room){
+async function moveAlongPath(name, destination){
 
   const person =
   people[name];
 
-  const pos =
-  positions[room];
+  const path =
+  paths[destination];
 
-  person.element.style.left =
-  pos.left;
+  if(!path) return;
 
-  person.element.style.top =
-  pos.top;
+  for(const room of path){
 
-  addLog(
-    `${name.toUpperCase()} → ${room.toUpperCase()}`
+    const pos =
+    positions[room];
+
+    person.element.style.left =
+    pos.left;
+
+    person.element.style.top =
+    pos.top;
+
+    addLog(
+      `${name.toUpperCase()} → ${room.toUpperCase()}`
+    );
+
+    await sleep(1800);
+
+  }
+
+}
+
+function sleep(ms){
+
+  return new Promise(resolve =>
+    setTimeout(resolve, ms)
   );
 
 }
 
-function randomMove(){
+function randomDestination(){
 
-  const rooms =
-  Object.keys(positions);
+  const keys =
+  Object.keys(paths);
 
-  movePerson(
+  return keys[
+    Math.floor(
+      Math.random() * keys.length
+    )
+  ];
+
+}
+
+async function randomMove(){
+
+  moveAlongPath(
     "marco",
-    rooms[
-      Math.floor(
-        Math.random() * rooms.length
-      )
-    ]
+    randomDestination()
   );
 
-  movePerson(
+  moveAlongPath(
     "serena",
-    rooms[
-      Math.floor(
-        Math.random() * rooms.length
-      )
-    ]
+    randomDestination()
   );
 
-  movePerson(
+  moveAlongPath(
     "damiano",
-    rooms[
-      Math.floor(
-        Math.random() * rooms.length
-      )
-    ]
+    randomDestination()
+  );
+
+  moveAlongPath(
+    "cinzia",
+    randomDestination()
   );
 
 }
@@ -143,11 +219,11 @@ function toggleMovement(){
     interval =
     setInterval(
       randomMove,
-      4000
+      10000
     );
 
     addLog(
-      "TRACKING LIVE ATTIVATO"
+      "PERCORSI AI ATTIVATI"
     );
 
   }else{
@@ -155,7 +231,7 @@ function toggleMovement(){
     clearInterval(interval);
 
     addLog(
-      "TRACKING LIVE FERMATO"
+      "TRACKING FERMATO"
     );
 
   }
