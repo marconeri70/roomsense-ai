@@ -2,11 +2,13 @@
 <html lang="it">
 
 <head>
+
   <meta charset="UTF-8">
+
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-  <title>RoomSense AI</title>
+  <title>RoomSense Tactical AI</title>
 
   <link rel="stylesheet"
         href="style.css">
@@ -16,137 +18,257 @@
 
   <meta name="theme-color"
         content="#020617">
+
 </head>
 
 <body>
 
   <header class="topbar">
 
-    <div class="logoBox">
+    <div class="logoArea">
 
       <div class="logoIcon">
         📡
       </div>
 
       <div>
-        <h1>RoomSense AI</h1>
+
+        <h1>RoomSense Tactical AI</h1>
+
         <p>
-          Mappa casa intelligente
+          Tactical Presence Detection System
         </p>
+
       </div>
 
     </div>
 
-    <button class="installBtn"
-            id="installBtn">
-      Installa
+    <button id="installBtn"
+            class="installBtn">
+
+      INSTALLA
+
     </button>
 
   </header>
 
   <main class="mainContainer">
 
-    <section class="dashboardGrid">
+    <section class="dashboard">
 
-      <div class="infoCard">
-        <h3>Persone rilevate</h3>
+      <div class="card">
+
+        <h3>PERSONE</h3>
 
         <span id="peopleCount">
           0
         </span>
+
       </div>
 
-      <div class="infoCard">
-        <h3>Stanze attive</h3>
+      <div class="card">
+
+        <h3>STANZE ATTIVE</h3>
 
         <span id="roomCount">
           0
         </span>
+
       </div>
 
-      <div class="infoCard">
-        <h3>AI Status</h3>
+      <div class="card">
 
-        <span class="onlineText">
+        <h3>SISTEMA AI</h3>
+
+        <span class="online">
           ONLINE
         </span>
+
       </div>
 
     </section>
 
-    <section class="houseWrapper">
+    <section class="mapSection">
 
-      <div class="houseMap">
+      <div class="mapGrid">
+
+        <div class="room"
+             id="camera1">
+
+          <div class="roomTitle">
+            🛏️ CAMERA 1
+          </div>
+
+          <div class="roomStatus"
+               id="status-camera1">
+
+            NESSUNA PRESENZA
+
+          </div>
+
+          <div class="scanner"></div>
+
+        </div>
+
+        <div class="room"
+             id="camera2">
+
+          <div class="roomTitle">
+            🛏️ CAMERA 2
+          </div>
+
+          <div class="roomStatus"
+               id="status-camera2">
+
+            NESSUNA PRESENZA
+
+          </div>
+
+          <div class="scanner"></div>
+
+        </div>
+
+        <div class="room"
+             id="camera3">
+
+          <div class="roomTitle">
+            🛏️ CAMERA 3
+          </div>
+
+          <div class="roomStatus"
+               id="status-camera3">
+
+            NESSUNA PRESENZA
+
+          </div>
+
+          <div class="scanner"></div>
+
+        </div>
+
+        <div class="room"
+             id="studio">
+
+          <div class="roomTitle">
+            🖥️ STUDIO
+          </div>
+
+          <div class="roomStatus"
+               id="status-studio">
+
+            NESSUNA PRESENZA
+
+          </div>
+
+          <div class="scanner"></div>
+
+        </div>
 
         <div class="room"
              id="cucina">
 
           <div class="roomTitle">
-            🍳 Cucina
+            🍳 CUCINA
           </div>
 
           <div class="roomStatus"
                id="status-cucina">
 
-            Nessuno rilevato
+            NESSUNA PRESENZA
 
           </div>
 
-          <div class="radar"></div>
+          <div class="scanner"></div>
 
         </div>
 
         <div class="room"
-             id="salone">
+             id="soggiorno">
 
           <div class="roomTitle">
-            🛋️ Salone
+            🛋️ SOGGIORNO
           </div>
 
           <div class="roomStatus"
-               id="status-salone">
+               id="status-soggiorno">
 
-            Nessuno rilevato
+            NESSUNA PRESENZA
 
           </div>
 
-          <div class="radar"></div>
+          <div class="scanner"></div>
 
         </div>
 
         <div class="room"
-             id="camera">
+             id="bagno1">
 
           <div class="roomTitle">
-            🛏️ Camera
+            🚿 BAGNO 1
           </div>
 
           <div class="roomStatus"
-               id="status-camera">
+               id="status-bagno1">
 
-            Nessuno rilevato
+            NESSUNA PRESENZA
 
           </div>
 
-          <div class="radar"></div>
+          <div class="scanner"></div>
 
         </div>
 
         <div class="room"
-             id="garage">
+             id="bagno2">
 
           <div class="roomTitle">
-            🚗 Garage
+            🚿 BAGNO 2
           </div>
 
           <div class="roomStatus"
-               id="status-garage">
+               id="status-bagno2">
 
-            Nessuno rilevato
+            NESSUNA PRESENZA
 
           </div>
 
-          <div class="radar"></div>
+          <div class="scanner"></div>
+
+        </div>
+
+        <div class="room"
+             id="ingresso">
+
+          <div class="roomTitle">
+            🚪 INGRESSO
+          </div>
+
+          <div class="roomStatus"
+               id="status-ingresso">
+
+            NESSUNA PRESENZA
+
+          </div>
+
+          <div class="scanner"></div>
+
+        </div>
+
+        <div class="room"
+             id="corridoio">
+
+          <div class="roomTitle">
+            📍 CORRIDOIO
+          </div>
+
+          <div class="roomStatus"
+               id="status-corridoio">
+
+            NESSUNA PRESENZA
+
+          </div>
+
+          <div class="scanner"></div>
 
         </div>
 
@@ -160,31 +282,35 @@
         Marco → Cucina
       </button>
 
-      <button onclick="detectPerson('Serena','camera')">
-        Serena → Camera
+      <button onclick="detectPerson('Serena','camera1')">
+        Serena → Camera 1
       </button>
 
-      <button onclick="detectPerson('Damiano','salone')">
-        Damiano → Salone
+      <button onclick="detectPerson('Damiano','soggiorno')">
+        Damiano → Soggiorno
       </button>
 
-      <button onclick="detectPerson('Marco','garage')">
-        Marco → Garage
+      <button onclick="detectPerson('Marco','studio')">
+        Marco → Studio
       </button>
 
-      <button onclick="resetRooms()">
-        Reset
+      <button onclick="detectPerson('Serena','camera3')">
+        Serena → Camera 3
+      </button>
+
+      <button onclick="resetSystem()">
+        RESET SISTEMA
       </button>
 
     </section>
 
-    <section class="activityBox">
+    <section class="logBox">
 
       <h2>
-        Log AI
+        LOG TACTICAL AI
       </h2>
 
-      <div id="activityLog">
+      <div id="logContainer">
 
       </div>
 
