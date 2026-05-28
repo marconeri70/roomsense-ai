@@ -17,6 +17,26 @@
 
 <body>
 
+  <div id="alarmOverlay">
+
+    <div class="alarmBox">
+
+      <h1>
+        ⚠ INTRUSO RILEVATO
+      </h1>
+
+      <p id="alarmText">
+        Movimento sconosciuto rilevato
+      </p>
+
+      <button onclick="resetAlarm()">
+        RESET ALLARME
+      </button>
+
+    </div>
+
+  </div>
+
   <header class="topbar">
 
     <div class="logoArea">
@@ -30,19 +50,18 @@
         <h1>RoomSense Tactical AI</h1>
 
         <p>
-          Tactical Live Tracking System
+          Tactical Security System
         </p>
 
       </div>
 
     </div>
 
-    <button id="installBtn"
-            class="installBtn">
+    <div class="securityBadge">
 
-      INSTALLA
+      🔴 SECURITY MODE
 
-    </button>
+    </div>
 
   </header>
 
@@ -55,7 +74,7 @@
         <h3>PERSONE</h3>
 
         <span id="peopleCount">
-          3
+          4
         </span>
 
       </div>
@@ -64,7 +83,7 @@
 
         <h3>TRACKING</h3>
 
-        <span id="roomCount">
+        <span>
           LIVE
         </span>
 
@@ -72,10 +91,10 @@
 
       <div class="card">
 
-        <h3>SISTEMA AI</h3>
+        <h3>SISTEMA</h3>
 
         <span class="online">
-          ONLINE
+          ARMED
         </span>
 
       </div>
@@ -87,11 +106,11 @@
       <div class="mapHeader">
 
         <h2>
-          LIVE TACTICAL OVERLAY
+          SECURITY OVERLAY
         </h2>
 
         <p>
-          Tracking persone realtime
+          Tactical Presence Detection
         </p>
 
       </div>
@@ -102,7 +121,7 @@
              class="planImage"
              alt="Planimetria casa" />
 
-        <!-- PUNTI STANZE -->
+        <!-- STANZE -->
 
         <div class="roomPoint"
              style="left:10%; top:53%;">
@@ -154,7 +173,7 @@
           <span>SOGGIORNO</span>
         </div>
 
-        <!-- AVATAR LIVE -->
+        <!-- AVATAR -->
 
         <div class="avatar marco"
              id="avatar-marco">
@@ -198,9 +217,20 @@
             Cinzia
           </div>
 
-         </div>
+        </div>
 
-        <!-- LINEA RADAR -->
+        <!-- INTRUSO -->
+
+        <div class="avatar intruder"
+             id="avatar-intruder">
+
+          <div class="avatarDot"></div>
+
+          <div class="avatarLabel">
+            UNKNOWN
+          </div>
+
+        </div>
 
         <div class="scanLine"></div>
 
@@ -211,7 +241,15 @@
     <section class="controls">
 
       <button onclick="toggleMovement()">
-        ATTIVA / FERMA TRACKING
+        ATTIVA TRACKING
+      </button>
+
+      <button onclick="simulateIntruder()">
+        SIMULA INTRUSO
+      </button>
+
+      <button onclick="resetAlarm()">
+        RESET ALLARME
       </button>
 
     </section>
@@ -219,7 +257,7 @@
     <section class="logBox">
 
       <h2>
-        LOG LIVE TRACKING
+        SECURITY LOG
       </h2>
 
       <div id="logContainer"></div>
