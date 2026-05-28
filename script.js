@@ -4,8 +4,8 @@ document.getElementById("peopleCount");
 const roomCount =
 document.getElementById("roomCount");
 
-const activityLog =
-document.getElementById("activityLog");
+const logContainer =
+document.getElementById("logContainer");
 
 let activeRooms = [];
 
@@ -13,9 +13,9 @@ function detectPerson(person, room){
 
   document
   .querySelectorAll(".room")
-  .forEach(r => {
+  .forEach(roomBox => {
 
-    r.classList.remove("active");
+    roomBox.classList.remove("active");
 
   });
 
@@ -24,19 +24,19 @@ function detectPerson(person, room){
 
   roomElement.classList.add("active");
 
-  const status =
-  document.getElementById(
-    `status-${room}`
-  );
-
   const confidence =
   Math.floor(
     Math.random() * 20
   ) + 80;
 
+  const status =
+  document.getElementById(
+    `status-${room}`
+  );
+
   status.innerHTML = `
     ${person}<br>
-    Affidabilità ${confidence}%
+    Segnale ${confidence}%
   `;
 
   if(!activeRooms.includes(room)){
@@ -67,10 +67,10 @@ function addLog(text){
     → ${text}
   `;
 
-  activityLog.prepend(div);
+  logContainer.prepend(div);
 }
 
-function resetRooms(){
+function resetSystem(){
 
   document
   .querySelectorAll(".room")
@@ -85,7 +85,7 @@ function resetRooms(){
   .forEach(status => {
 
     status.innerHTML =
-    "Nessuno rilevato";
+    "NESSUNA PRESENZA";
 
   });
 
@@ -96,7 +96,7 @@ function resetRooms(){
   roomCount.innerText = "0";
 
   addLog(
-    "Sistema resettato"
+    "Sistema Tactical AI resettato"
   );
 }
 
@@ -126,6 +126,7 @@ document
       await deferredPrompt.userChoice;
 
       deferredPrompt = null;
+
     }
 
   }
