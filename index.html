@@ -1,118 +1,295 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
+
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0" />
 
   <title>RoomSense Tactical AI</title>
 
-  <link rel="stylesheet" href="style.css" />
-  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet"
+        href="style.css" />
 
-  <meta name="theme-color" content="#020617" />
+  <link rel="manifest"
+        href="manifest.webmanifest" />
+
+  <meta name="theme-color"
+        content="#020617" />
+
 </head>
 
 <body>
+
   <header class="topbar">
+
     <div class="logoArea">
-      <div class="logoIcon">📡</div>
-      <div>
-        <h1>RoomSense Tactical AI</h1>
-        <p>Overlay planimetria reale</p>
+
+      <div class="logoIcon">
+        📡
       </div>
+
+      <div>
+
+        <h1>RoomSense Tactical AI</h1>
+
+        <p>
+          Overlay Tactical Smart Home
+        </p>
+
+      </div>
+
     </div>
 
-    <button id="installBtn" class="installBtn">INSTALLA</button>
+    <button id="installBtn"
+            class="installBtn">
+
+      INSTALLA
+
+    </button>
+
   </header>
 
   <main class="mainContainer">
+
     <section class="dashboard">
+
       <div class="card">
+
         <h3>PERSONE</h3>
-        <span id="peopleCount">0</span>
+
+        <span id="peopleCount">
+          0
+        </span>
+
       </div>
 
       <div class="card">
+
         <h3>STANZE ATTIVE</h3>
-        <span id="roomCount">0</span>
+
+        <span id="roomCount">
+          0
+        </span>
+
       </div>
 
       <div class="card">
+
         <h3>SISTEMA AI</h3>
-        <span class="online">ONLINE</span>
+
+        <span class="online">
+          ONLINE
+        </span>
+
       </div>
+
     </section>
 
     <section class="mapPanel">
+
       <div class="mapHeader">
-        <h2>MAPPA TACTICAL CASA</h2>
-        <p>Scanner presenza su planimetria reale</p>
+
+        <h2>
+          MAPPA TACTICAL CASA
+        </h2>
+
+        <p>
+          Scanner presenza su planimetria reale
+        </p>
+
       </div>
 
       <div class="planWrapper">
-        <img src="planimetria.jpg" class="planImage" alt="Planimetria casa" />
 
-        <div class="roomPoint" id="point-ingresso" style="left:51%; top:49%;" onclick="detectPerson('Marco','ingresso')">
-          <span>INGRESSO</span>
+        <img src="planimetria.jpg"
+             class="planImage"
+             alt="Planimetria casa" />
+
+        <!-- BAGNO 1 -->
+
+        <div class="roomPoint"
+             id="point-bagno1"
+             style="left:9%; top:53%;"
+             onclick="detectPerson('Marco','bagno1')">
+
+          <span>
+            BAGNO 1
+          </span>
+
         </div>
 
-        <div class="roomPoint" id="point-corridoio" style="left:40%; top:57%;" onclick="detectPerson('Marco','corridoio')">
-          <span>CORRIDOIO</span>
+        <!-- CAMERA 1 -->
+
+        <div class="roomPoint"
+             id="point-camera1"
+             style="left:22%; top:63%;"
+             onclick="detectPerson('Serena','camera1')">
+
+          <span>
+            CAMERA 1
+          </span>
+
         </div>
 
-        <div class="roomPoint" id="point-cucina" style="left:58%; top:77%;" onclick="detectPerson('Marco','cucina')">
-          <span>CUCINA</span>
+        <!-- CAMERA 2 -->
+
+        <div class="roomPoint"
+             id="point-camera2"
+             style="left:24%; top:84%;"
+             onclick="detectPerson('Damiano','camera2')">
+
+          <span>
+            CAMERA 2
+          </span>
+
         </div>
 
-        <div class="roomPoint" id="point-soggiorno" style="left:76%; top:71%;" onclick="detectPerson('Damiano','soggiorno')">
-          <span>SOGGIORNO</span>
+        <!-- CORRIDOIO -->
+
+        <div class="roomPoint"
+             id="point-corridoio"
+             style="left:39%; top:56%;"
+             onclick="detectPerson('Marco','corridoio')">
+
+          <span>
+            CORRIDOIO
+          </span>
+
         </div>
 
-        <div class="roomPoint" id="point-studio" style="left:66%; top:37%;" onclick="detectPerson('Serena','studio')">
-          <span>STUDIO</span>
+        <!-- BAGNO 2 -->
+
+        <div class="roomPoint"
+             id="point-bagno2"
+             style="left:44%; top:73%;"
+             onclick="detectPerson('Serena','bagno2')">
+
+          <span>
+            BAGNO 2
+          </span>
+
         </div>
 
-        <div class="roomPoint" id="point-camera1" style="left:22%; top:63%;" onclick="detectPerson('Serena','camera1')">
-          <span>CAMERA 1</span>
+        <!-- INGRESSO -->
+
+        <div class="roomPoint"
+             id="point-ingresso"
+             style="left:50%; top:48%;"
+             onclick="detectPerson('Marco','ingresso')">
+
+          <span>
+            INGRESSO
+          </span>
+
         </div>
 
-        <div class="roomPoint" id="point-camera2" style="left:24%; top:82%;" onclick="detectPerson('Damiano','camera2')">
-          <span>CAMERA 2</span>
+        <!-- STUDIO -->
+
+        <div class="roomPoint"
+             id="point-studio"
+             style="left:66%; top:34%;"
+             onclick="detectPerson('Serena','studio')">
+
+          <span>
+            STUDIO
+          </span>
+
         </div>
 
-        <div class="roomPoint" id="point-camera3" style="left:86%; top:38%;" onclick="detectPerson('Marco','camera3')">
-          <span>CAMERA 3</span>
+        <!-- CAMERA 3 -->
+
+        <div class="roomPoint"
+             id="point-camera3"
+             style="left:86%; top:35%;"
+             onclick="detectPerson('Marco','camera3')">
+
+          <span>
+            CAMERA 3
+          </span>
+
         </div>
 
-        <div class="roomPoint" id="point-bagno1" style="left:9%; top:54%;" onclick="detectPerson('Marco','bagno1')">
-          <span>BAGNO 1</span>
+        <!-- CUCINA -->
+
+        <div class="roomPoint"
+             id="point-cucina"
+             style="left:58%; top:79%;"
+             onclick="detectPerson('Marco','cucina')">
+
+          <span>
+            CUCINA
+          </span>
+
         </div>
 
-        <div class="roomPoint" id="point-bagno2" style="left:45%; top:72%;" onclick="detectPerson('Serena','bagno2')">
-          <span>BAGNO 2</span>
+        <!-- SOGGIORNO -->
+
+        <div class="roomPoint"
+             id="point-soggiorno"
+             style="left:77%; top:72%;"
+             onclick="detectPerson('Damiano','soggiorno')">
+
+          <span>
+            SOGGIORNO
+          </span>
+
         </div>
+
+        <!-- LINEA SCANNER -->
 
         <div class="scanLine"></div>
+
       </div>
+
     </section>
 
     <section class="controls">
-      <button onclick="detectPerson('Marco','cucina')">Marco → Cucina</button>
-      <button onclick="detectPerson('Serena','camera1')">Serena → Camera 1</button>
-      <button onclick="detectPerson('Damiano','soggiorno')">Damiano → Soggiorno</button>
-      <button onclick="detectPerson('Marco','studio')">Marco → Studio</button>
-      <button onclick="detectPerson('Serena','camera3')">Serena → Camera 3</button>
-      <button onclick="resetSystem()">RESET SISTEMA</button>
-    </section>
 
-    <section class="statusGrid" id="statusGrid"></section>
+      <button onclick="detectPerson('Marco','cucina')">
+        Marco → Cucina
+      </button>
+
+      <button onclick="detectPerson('Serena','camera1')">
+        Serena → Camera 1
+      </button>
+
+      <button onclick="detectPerson('Damiano','soggiorno')">
+        Damiano → Soggiorno
+      </button>
+
+      <button onclick="detectPerson('Marco','studio')">
+        Marco → Studio
+      </button>
+
+      <button onclick="detectPerson('Serena','camera3')">
+        Serena → Camera 3
+      </button>
+
+      <button onclick="resetSystem()">
+        RESET SISTEMA
+      </button>
+
+    </section>
 
     <section class="logBox">
-      <h2>LOG TACTICAL AI</h2>
-      <div id="logContainer"></div>
+
+      <h2>
+        LOG TACTICAL AI
+      </h2>
+
+      <div id="logContainer">
+
+      </div>
+
     </section>
+
   </main>
 
   <script src="script.js"></script>
+
 </body>
+
 </html>
