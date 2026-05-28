@@ -8,7 +8,6 @@ body{
   background:#020617;
   color:#e2e8f0;
   font-family:Arial, Helvetica, sans-serif;
-  min-height:100vh;
 }
 
 .topbar{
@@ -45,7 +44,6 @@ body{
   font-weight:bold;
   padding:14px 24px;
   border-radius:16px;
-  cursor:pointer;
 }
 
 .mainContainer{
@@ -63,7 +61,6 @@ body{
   padding:25px;
   border-radius:24px;
   border:1px solid rgba(0,255,180,0.2);
-  box-shadow:0 0 15px rgba(0,255,180,0.1);
 }
 
 .card h3{
@@ -84,23 +81,8 @@ body{
 .mapPanel{
   margin-top:35px;
   background:linear-gradient(135deg,#020617,#0f172a);
-  border:1px solid rgba(0,255,180,0.2);
   border-radius:28px;
   padding:20px;
-  box-shadow:0 0 30px rgba(0,255,180,0.08);
-}
-
-.mapHeader{
-  margin-bottom:20px;
-}
-
-.mapHeader h2{
-  color:#00ffae;
-}
-
-.mapHeader p{
-  color:#94a3b8;
-  margin-top:6px;
 }
 
 .planWrapper{
@@ -108,31 +90,15 @@ body{
   width:100%;
   max-width:1100px;
   margin:auto;
-  border-radius:24px;
   overflow:hidden;
+  border-radius:24px;
   border:2px solid rgba(0,255,180,0.25);
-  background:#000;
 }
 
 .planImage{
-  display:block;
   width:100%;
-  height:auto;
+  display:block;
   opacity:0.72;
-  filter:contrast(1.15)
-         brightness(0.75)
-         saturate(0.65);
-}
-
-.planWrapper::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(rgba(0,255,180,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,255,180,0.05) 1px, transparent 1px);
-  background-size:28px 28px;
-  pointer-events:none;
 }
 
 .roomPoint{
@@ -141,46 +107,58 @@ body{
   width:90px;
   height:90px;
   border-radius:50%;
-  border:2px solid rgba(0,255,180,0.75);
+  border:2px solid rgba(0,255,180,0.7);
   background:rgba(0,255,180,0.08);
   display:flex;
   justify-content:center;
   align-items:center;
-  cursor:pointer;
-  box-shadow:0 0 25px rgba(0,255,180,0.35);
-  z-index:5;
-}
-
-.roomPoint::before{
-  content:"";
-  position:absolute;
-  inset:-12px;
-  border-radius:50%;
-  border:2px solid rgba(0,255,180,0.3);
-  animation:pulse 2s infinite;
+  box-shadow:0 0 20px rgba(0,255,180,0.35);
 }
 
 .roomPoint span{
-  background:rgba(2,6,23,0.92);
+  background:#020617;
   color:#00ffae;
-  padding:6px 9px;
+  padding:6px 10px;
   border-radius:10px;
   font-size:11px;
   font-weight:bold;
-  text-align:center;
-  border:1px solid rgba(0,255,180,0.35);
-  white-space:nowrap;
 }
 
-.roomPoint.active{
-  background:rgba(255,51,51,0.18);
-  border-color:#ff3333;
-  box-shadow:0 0 35px rgba(255,51,51,0.65);
+.avatar{
+  position:absolute;
+  transform:translate(-50%,-50%);
+  z-index:50;
+  transition:left 2s linear, top 2s linear;
 }
 
-.roomPoint.active span{
+.avatarDot{
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  border:3px solid white;
+  box-shadow:0 0 20px currentColor;
+}
+
+.avatarLabel{
+  margin-top:6px;
+  background:#020617;
   color:white;
-  border-color:rgba(255,51,51,0.6);
+  padding:4px 8px;
+  border-radius:10px;
+  font-size:11px;
+  text-align:center;
+}
+
+.marco{
+  color:#00ffae;
+}
+
+.serena{
+  color:#ff00ff;
+}
+
+.damiano{
+  color:#00b3ff;
 }
 
 .scanLine{
@@ -189,30 +167,9 @@ body{
   top:0;
   width:100%;
   height:4px;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    #00ffae,
-    transparent
-  );
+  background:linear-gradient(90deg,transparent,#00ffae,transparent);
   box-shadow:0 0 20px #00ffae;
   animation:scanMove 4s linear infinite;
-  z-index:6;
-  opacity:0.75;
-}
-
-@keyframes pulse{
-
-  0%{
-    transform:scale(0.8);
-    opacity:1;
-  }
-
-  100%{
-    transform:scale(1.45);
-    opacity:0;
-  }
-
 }
 
 @keyframes scanMove{
@@ -228,21 +185,18 @@ body{
 }
 
 .controls{
-  margin-top:35px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:15px;
+  margin-top:30px;
 }
 
 .controls button{
+  width:100%;
+  padding:18px;
   border:none;
+  border-radius:18px;
   background:linear-gradient(135deg,#00ffae,#00b3ff);
   color:black;
-  font-size:16px;
+  font-size:18px;
   font-weight:bold;
-  padding:18px;
-  border-radius:18px;
-  cursor:pointer;
 }
 
 .logBox{
@@ -250,11 +204,6 @@ body{
   background:#0f172a;
   padding:25px;
   border-radius:24px;
-  border:1px solid rgba(0,255,180,0.15);
-}
-
-.logBox h2{
-  color:#00ffae;
 }
 
 #logContainer{
@@ -264,24 +213,26 @@ body{
 .logItem{
   padding:12px;
   border-bottom:1px solid rgba(255,255,255,0.08);
-  color:#cbd5e1;
 }
 
 @media(max-width:768px){
 
-  .topbar{
-    flex-direction:column;
-    gap:20px;
-  }
-
   .roomPoint{
-    width:54px;
-    height:54px;
+    width:52px;
+    height:52px;
   }
 
   .roomPoint span{
     font-size:7px;
-    padding:3px 5px;
+  }
+
+  .avatarDot{
+    width:16px;
+    height:16px;
+  }
+
+  .avatarLabel{
+    font-size:8px;
   }
 
 }
