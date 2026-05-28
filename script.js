@@ -1,123 +1,178 @@
-const peopleCount = document.getElementById("peopleCount");
-const roomCount = document.getElementById("roomCount");
-const logContainer = document.getElementById("logContainer");
-const statusGrid = document.getElementById("statusGrid");
+const logContainer =
+document.getElementById("logContainer");
 
-const roomNames = {
-  ingresso: "Ingresso",
-  corridoio: "Corridoio",
-  cucina: "Cucina",
-  soggiorno: "Soggiorno",
-  studio: "Studio",
-  camera1: "Camera 1",
-  camera2: "Camera 2",
-  camera3: "Camera 3",
-  bagno1: "Bagno 1",
-  bagno2: "Bagno 2"
+let trackingActive = false;
+let interval;
+
+const positions = {
+
+  bagno1:{
+    left:"10%",
+    top:"53%"
+  },
+
+  camera1:{
+    left:"12%",
+    top:"74%"
+  },
+
+  camera2:{
+    left:"31%",
+    top:"74%"
+  },
+
+  corridoio:{
+    left:"36%",
+    top:"57%"
+  },
+
+  bagno2:{
+    left:"47%",
+    top:"72%"
+  },
+
+  ingresso:{
+    left:"54%",
+    top:"49%"
+  },
+
+  studio:{
+    left:"63%",
+    top:"39%"
+  },
+
+  camera3:{
+    left:"85%",
+    top:"41%"
+  },
+
+  cucina:{
+    left:"58%",
+    top:"76%"
+  },
+
+  soggiorno:{
+    left:"76%",
+    top:"71%"
+  }
+
 };
 
-let detections = {};
+const people = {
 
-function detectPerson(person, room){
-  const confidence = Math.floor(Math.random() * 20) + 80;
-  const time = new Date().toLocaleTimeString();
+  marco:{
+    element:
+    document.getElementById("avatar-marco")
+  },
 
-  detections[room] = {
-    person,
-    confidence,
-    time
-  };
+  serena:{
+    element:
+    document.getElementById("avatar-serena")
+  },
 
-  updateMap();
-  updateStatusGrid();
+  damiano:{
+    element:
+    document.getElementById("avatar-damiano")
+  }
 
-  addLog(`${person} rilevato in ${roomNames[room]} con affidabilità ${confidence}%`);
+};
+
+function movePerson(name, room){
+
+  const person =
+  people[name];
+
+  const pos =
+  positions[room];
+
+  person.element.style.left =
+  pos.left;
+
+  person.element.style.top =
+  pos.top;
+
+  addLog(
+    `${name.toUpperCase()} → ${room.toUpperCase()}`
+  );
+
 }
 
-function updateMap(){
-  document.querySelectorAll(".roomPoint").forEach(point => {
-    point.classList.remove("active");
-  });
+function randomMove(){
 
-  Object.keys(detections).forEach(room => {
-    const point = document.getElementById(`point-${room}`);
-    if(point){
-      point.classList.add("active");
-      point.querySelector("span").innerHTML =
-        `${roomNames[room]}<br>${detections[room].person}<br>${detections[room].confidence}%`;
-    }
-  });
+  const rooms =
+  Object.keys(positions);
 
-  const people = new Set(Object.values(detections).map(d => d.person));
-  const rooms = Object.keys(detections);
+  movePerson(
+    "marco",
+    rooms[
+      Math.floor(
+        Math.random() * rooms.length
+      )
+    ]
+  );
 
-  peopleCount.innerText = people.size;
-  roomCount.innerText = rooms.length;
+  movePerson(
+    "serena",
+    rooms[
+      Math.floor(
+        Math.random() * rooms.length
+      )
+    ]
+  );
+
+  movePerson(
+    "damiano",
+    rooms[
+      Math.floor(
+        Math.random() * rooms.length
+      )
+    ]
+  );
+
 }
 
-function updateStatusGrid(){
-  statusGrid.innerHTML = "";
+function toggleMovement(){
 
-  Object.keys(roomNames).forEach(room => {
-    const data = detections[room];
+  trackingActive =
+  !trackingActive;
 
-    statusGrid.innerHTML += `
-      <div class="statusCard">
-        <h3>${roomNames[room]}</h3>
-        <p>
-          ${
-            data
-              ? `${data.person}<br>Segnale ${data.confidence}%<br>Ore ${data.time}`
-              : "Nessuna presenza"
-          }
-        </p>
-      </div>
-    `;
-  });
+  if(trackingActive){
+
+    randomMove();
+
+    interval =
+    setInterval(
+      randomMove,
+      4000
+    );
+
+    addLog(
+      "TRACKING LIVE ATTIVATO"
+    );
+
+  }else{
+
+    clearInterval(interval);
+
+    addLog(
+      "TRACKING LIVE FERMATO"
+    );
+
+  }
+
 }
 
 function addLog(text){
-  const div = document.createElement("div");
-  div.className = "logItem";
-  div.innerHTML = `${new Date().toLocaleTimeString()} → ${text}`;
+
+  const div =
+  document.createElement("div");
+
+  div.className =
+  "logItem";
+
+  div.innerHTML =
+  `${new Date().toLocaleTimeString()} → ${text}`;
+
   logContainer.prepend(div);
+
 }
-
-function resetSystem(){
-  detections = {};
-
-  document.querySelectorAll(".roomPoint").forEach(point => {
-    point.classList.remove("active");
-
-    const id = point.id.replace("point-", "");
-    point.querySelector("span").innerHTML = roomNames[id].toUpperCase();
-  });
-
-  peopleCount.innerText = "0";
-  roomCount.innerText = "0";
-
-  updateStatusGrid();
-
-  addLog("Sistema Tactical AI resettato");
-}
-
-let deferredPrompt;
-
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-});
-
-document.getElementById("installBtn").addEventListener("click", async () => {
-  if(deferredPrompt){
-    deferredPrompt.prompt();
-    await deferredPrompt.userChoice;
-    deferredPrompt = null;
-  }
-});
-
-if("serviceWorker" in navigator){
-  navigator.serviceWorker.register("service-worker.js");
-}
-
-updateStatusGrid();
