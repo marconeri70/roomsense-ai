@@ -13,12 +13,6 @@
   <link rel="stylesheet"
         href="style.css" />
 
-  <link rel="manifest"
-        href="manifest.webmanifest" />
-
-  <meta name="theme-color"
-        content="#020617" />
-
 </head>
 
 <body>
@@ -36,7 +30,7 @@
         <h1>RoomSense Tactical AI</h1>
 
         <p>
-          Overlay Tactical Smart Home
+          Tactical Live Tracking System
         </p>
 
       </div>
@@ -61,17 +55,17 @@
         <h3>PERSONE</h3>
 
         <span id="peopleCount">
-          0
+          3
         </span>
 
       </div>
 
       <div class="card">
 
-        <h3>STANZE ATTIVE</h3>
+        <h3>TRACKING</h3>
 
         <span id="roomCount">
-          0
+          LIVE
         </span>
 
       </div>
@@ -93,11 +87,11 @@
       <div class="mapHeader">
 
         <h2>
-          MAPPA TACTICAL CASA
+          LIVE TACTICAL OVERLAY
         </h2>
 
         <p>
-          Scanner presenza su planimetria reale
+          Tracking persone realtime
         </p>
 
       </div>
@@ -108,137 +102,94 @@
              class="planImage"
              alt="Planimetria casa" />
 
-        <!-- BAGNO 1 -->
+        <!-- PUNTI STANZE -->
 
         <div class="roomPoint"
-             id="point-bagno1"
-             style="left:10%; top:53%;"
-             onclick="detectPerson('Marco','bagno1')">
+             style="left:10%; top:53%;">
+          <span>BAGNO 1</span>
+        </div>
 
-          <span>
-            BAGNO 1
-          </span>
+        <div class="roomPoint"
+             style="left:12%; top:74%;">
+          <span>CAMERA 1</span>
+        </div>
+
+        <div class="roomPoint"
+             style="left:31%; top:74%;">
+          <span>CAMERA 2</span>
+        </div>
+
+        <div class="roomPoint"
+             style="left:36%; top:57%;">
+          <span>CORRIDOIO</span>
+        </div>
+
+        <div class="roomPoint"
+             style="left:47%; top:72%;">
+          <span>BAGNO 2</span>
+        </div>
+
+        <div class="roomPoint"
+             style="left:54%; top:49%;">
+          <span>INGRESSO</span>
+        </div>
+
+        <div class="roomPoint"
+             style="left:63%; top:39%;">
+          <span>STUDIO</span>
+        </div>
+
+        <div class="roomPoint"
+             style="left:85%; top:41%;">
+          <span>CAMERA 3</span>
+        </div>
+
+        <div class="roomPoint"
+             style="left:58%; top:76%;">
+          <span>CUCINA</span>
+        </div>
+
+        <div class="roomPoint"
+             style="left:76%; top:71%;">
+          <span>SOGGIORNO</span>
+        </div>
+
+        <!-- AVATAR LIVE -->
+
+        <div class="avatar marco"
+             id="avatar-marco">
+
+          <div class="avatarDot"></div>
+
+          <div class="avatarLabel">
+            Marco
+          </div>
 
         </div>
 
-        <!-- CAMERA 1 -->
+        <div class="avatar serena"
+             id="avatar-serena">
 
-        <div class="roomPoint"
-             id="point-camera1"
-             style="left:12%; top:74%;"
-             onclick="detectPerson('Serena','camera1')">
+          <div class="avatarDot"></div>
 
-          <span>
-            CAMERA 1
-          </span>
+          <div class="avatarLabel">
+            Serena
+          </div>
 
         </div>
 
-        <!-- CAMERA 2 -->
+        <div class="avatar damiano"
+             id="avatar-damiano">
 
-        <div class="roomPoint"
-             id="point-camera2"
-             style="left:31%; top:74%;"
-             onclick="detectPerson('Damiano','camera2')">
+          <div class="avatarDot"></div>
 
-          <span>
-            CAMERA 2
-          </span>
+          <div class="avatarLabel">
+            Damiano
+          </div>
 
         </div>
 
-        <!-- CORRIDOIO -->
-
-        <div class="roomPoint"
-             id="point-corridoio"
-             style="left:36%; top:57%;"
-             onclick="detectPerson('Marco','corridoio')">
-
-          <span>
-            CORRIDOIO
-          </span>
-
-        </div>
-
-        <!-- BAGNO 2 -->
-
-        <div class="roomPoint"
-             id="point-bagno2"
-             style="left:47%; top:72%;"
-             onclick="detectPerson('Serena','bagno2')">
-
-          <span>
-            BAGNO 2
-          </span>
-
-        </div>
-
-        <!-- INGRESSO -->
-
-        <div class="roomPoint"
-             id="point-ingresso"
-             style="left:54%; top:49%;"
-             onclick="detectPerson('Marco','ingresso')">
-
-          <span>
-            INGRESSO
-          </span>
-
-        </div>
-
-        <!-- STUDIO -->
-
-        <div class="roomPoint"
-             id="point-studio"
-             style="left:63%; top:39%;"
-             onclick="detectPerson('Serena','studio')">
-
-          <span>
-            STUDIO
-          </span>
-
-        </div>
-
-        <!-- CAMERA 3 -->
-
-        <div class="roomPoint"
-             id="point-camera3"
-             style="left:85%; top:41%;"
-             onclick="detectPerson('Marco','camera3')">
-
-          <span>
-            CAMERA 3
-          </span>
-
-        </div>
-
-        <!-- CUCINA -->
-
-        <div class="roomPoint"
-             id="point-cucina"
-             style="left:58%; top:76%;"
-             onclick="detectPerson('Marco','cucina')">
-
-          <span>
-            CUCINA
-          </span>
-
-        </div>
-
-        <!-- SOGGIORNO -->
-
-        <div class="roomPoint"
-             id="point-soggiorno"
-             style="left:76%; top:71%;"
-             onclick="detectPerson('Damiano','soggiorno')">
-
-          <span>
-            SOGGIORNO
-          </span>
-
-        </div>
-
-        <!-- LINEA SCANNER -->
+        <!-- LINEA RADAR -->
 
         <div class="scanLine"></div>
 
@@ -248,28 +199,8 @@
 
     <section class="controls">
 
-      <button onclick="detectPerson('Marco','cucina')">
-        Marco → Cucina
-      </button>
-
-      <button onclick="detectPerson('Serena','camera1')">
-        Serena → Camera 1
-      </button>
-
-      <button onclick="detectPerson('Damiano','soggiorno')">
-        Damiano → Soggiorno
-      </button>
-
-      <button onclick="detectPerson('Marco','studio')">
-        Marco → Studio
-      </button>
-
-      <button onclick="detectPerson('Serena','camera3')">
-        Serena → Camera 3
-      </button>
-
-      <button onclick="resetSystem()">
-        RESET SISTEMA
+      <button onclick="toggleMovement()">
+        ATTIVA / FERMA TRACKING
       </button>
 
     </section>
@@ -277,12 +208,10 @@
     <section class="logBox">
 
       <h2>
-        LOG TACTICAL AI
+        LOG LIVE TRACKING
       </h2>
 
-      <div id="logContainer">
-
-      </div>
+      <div id="logContainer"></div>
 
     </section>
 
